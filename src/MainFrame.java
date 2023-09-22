@@ -1,3 +1,7 @@
+
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,11 +12,16 @@
  * @author migyu
  */
 public class MainFrame extends javax.swing.JFrame {
-    String numTemp = "";
-    String numResult = "";
-    String operator = "";
-    double inputTemp = 0;
-    double inputResult = 0;
+    private String screenTemp = ""; // 현재 화면에 보이는 문자
+    private String strResult;
+    private String numResult;
+    private String strMemory;
+    private String number = "";
+    private char op;
+    private double tempNum = 0;   // 화면에 보이는 문자를 실수로 변환한 것
+    private double calResult = 0; // 연산 결과
+    private int flag;
+    
     
     /**
      * Creates new form MainFrame
@@ -32,10 +41,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbtnHex = new javax.swing.JRadioButton();
+        rbtnDec = new javax.swing.JRadioButton();
+        rbtnOct = new javax.swing.JRadioButton();
+        rbtnBin = new javax.swing.JRadioButton();
         btnCE = new javax.swing.JButton();
         resultField = new javax.swing.JTextField();
         btnC = new javax.swing.JButton();
@@ -58,13 +67,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnPlus = new javax.swing.JButton();
         btnMin = new javax.swing.JButton();
         btnNot = new javax.swing.JButton();
-        Sta22 = new javax.swing.JButton();
+        btnLsh = new javax.swing.JButton();
         btnXor = new javax.swing.JButton();
-        Sta24 = new javax.swing.JButton();
+        btnOr = new javax.swing.JButton();
         btnMul = new javax.swing.JButton();
         btnDiv = new javax.swing.JButton();
         btnAnd = new javax.swing.JButton();
-        Sta28 = new javax.swing.JButton();
+        btnMod = new javax.swing.JButton();
         btnComma = new javax.swing.JButton();
         Sta30 = new javax.swing.JButton();
         Sta31 = new javax.swing.JButton();
@@ -79,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
         Sta40 = new javax.swing.JButton();
         Sta41 = new javax.swing.JButton();
         Sta42 = new javax.swing.JButton();
-        Sta43 = new javax.swing.JButton();
+        btnDms = new javax.swing.JButton();
         Sta44 = new javax.swing.JButton();
         Sta45 = new javax.swing.JButton();
         Sta46 = new javax.swing.JButton();
@@ -88,30 +97,50 @@ public class MainFrame extends javax.swing.JFrame {
         Sta49 = new javax.swing.JButton();
         Sta50 = new javax.swing.JButton();
         Sta51 = new javax.swing.JButton();
-        Sta52 = new javax.swing.JButton();
+        btnPi = new javax.swing.JButton();
         Sta53 = new javax.swing.JButton();
-        Sta54 = new javax.swing.JButton();
-        Sta55 = new javax.swing.JButton();
+        btnMC = new javax.swing.JButton();
+        btnMR = new javax.swing.JButton();
         Sta56 = new javax.swing.JButton();
         Sta57 = new javax.swing.JButton();
         Sta58 = new javax.swing.JButton();
         Sta59 = new javax.swing.JButton();
         btnInt = new javax.swing.JButton();
         btnResult = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        chbInv = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(227, 221, 211));
 
-        jRadioButton1.setText("Hex");
+        rbtnHex.setText("Hex");
+        rbtnHex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnHexActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Dec");
+        rbtnDec.setText("Dec");
+        rbtnDec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnDecActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Oct");
+        rbtnOct.setText("Oct");
+        rbtnOct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnOctActionPerformed(evt);
+            }
+        });
 
-        jRadioButton4.setText("Bin");
+        rbtnBin.setText("Bin");
+        rbtnBin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnBinActionPerformed(evt);
+            }
+        });
 
         btnCE.setBackground(new java.awt.Color(235, 233, 230));
         btnCE.setForeground(new java.awt.Color(255, 0, 51));
@@ -122,6 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        resultField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         resultField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultFieldActionPerformed(evt);
@@ -286,12 +316,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta22.setBackground(new java.awt.Color(235, 233, 230));
-        Sta22.setForeground(new java.awt.Color(255, 0, 0));
-        Sta22.setText("2");
-        Sta22.addActionListener(new java.awt.event.ActionListener() {
+        btnLsh.setBackground(new java.awt.Color(235, 233, 230));
+        btnLsh.setForeground(new java.awt.Color(255, 0, 0));
+        btnLsh.setText("Lsh");
+        btnLsh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta22ActionPerformed(evt);
+                btnLshActionPerformed(evt);
             }
         });
 
@@ -304,12 +334,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta24.setBackground(new java.awt.Color(235, 233, 230));
-        Sta24.setForeground(new java.awt.Color(255, 0, 0));
-        Sta24.setText("5");
-        Sta24.addActionListener(new java.awt.event.ActionListener() {
+        btnOr.setBackground(new java.awt.Color(235, 233, 230));
+        btnOr.setForeground(new java.awt.Color(255, 0, 0));
+        btnOr.setText("Or");
+        btnOr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta24ActionPerformed(evt);
+                btnOrActionPerformed(evt);
             }
         });
 
@@ -340,12 +370,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta28.setBackground(new java.awt.Color(235, 233, 230));
-        Sta28.setForeground(new java.awt.Color(255, 0, 0));
-        Sta28.setText("Mod");
-        Sta28.addActionListener(new java.awt.event.ActionListener() {
+        btnMod.setBackground(new java.awt.Color(235, 233, 230));
+        btnMod.setForeground(new java.awt.Color(255, 0, 0));
+        btnMod.setText("Mod");
+        btnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta28ActionPerformed(evt);
+                btnModActionPerformed(evt);
             }
         });
 
@@ -469,12 +499,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta43.setBackground(new java.awt.Color(235, 233, 230));
-        Sta43.setForeground(new java.awt.Color(255, 51, 255));
-        Sta43.setText("dms");
-        Sta43.addActionListener(new java.awt.event.ActionListener() {
+        btnDms.setBackground(new java.awt.Color(235, 233, 230));
+        btnDms.setForeground(new java.awt.Color(255, 51, 255));
+        btnDms.setText("dms");
+        btnDms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta43ActionPerformed(evt);
+                btnDmsActionPerformed(evt);
             }
         });
 
@@ -551,12 +581,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta52.setBackground(new java.awt.Color(235, 233, 230));
-        Sta52.setForeground(new java.awt.Color(0, 51, 255));
-        Sta52.setText("pi");
-        Sta52.addActionListener(new java.awt.event.ActionListener() {
+        btnPi.setBackground(new java.awt.Color(235, 233, 230));
+        btnPi.setForeground(new java.awt.Color(0, 51, 255));
+        btnPi.setText("pi");
+        btnPi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta52ActionPerformed(evt);
+                btnPiActionPerformed(evt);
             }
         });
 
@@ -569,21 +599,21 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        Sta54.setBackground(new java.awt.Color(235, 233, 230));
-        Sta54.setForeground(new java.awt.Color(255, 0, 0));
-        Sta54.setText("MC");
-        Sta54.addActionListener(new java.awt.event.ActionListener() {
+        btnMC.setBackground(new java.awt.Color(235, 233, 230));
+        btnMC.setForeground(new java.awt.Color(255, 0, 0));
+        btnMC.setText("MC");
+        btnMC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta54ActionPerformed(evt);
+                btnMCActionPerformed(evt);
             }
         });
 
-        Sta55.setBackground(new java.awt.Color(235, 233, 230));
-        Sta55.setForeground(new java.awt.Color(255, 0, 0));
-        Sta55.setText("MR");
-        Sta55.addActionListener(new java.awt.event.ActionListener() {
+        btnMR.setBackground(new java.awt.Color(235, 233, 230));
+        btnMR.setForeground(new java.awt.Color(255, 0, 0));
+        btnMR.setText("MR");
+        btnMR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Sta55ActionPerformed(evt);
+                btnMRActionPerformed(evt);
             }
         });
 
@@ -637,7 +667,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Inv");
+        chbInv.setText("Inv");
+        chbInv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbInvActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setText("Hyp");
 
@@ -670,7 +705,7 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(Sta37, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Sta38, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Sta43, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnDms, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Sta44, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(25, 25, 25)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,22 +730,22 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Sta55, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Sta54, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnMR, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnMC, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Sta53, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Sta52, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPi, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Sta51, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtnHex, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtnDec, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtnOct, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rbtnBin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chbInv, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckBox2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
@@ -766,8 +801,8 @@ public class MainFrame extends javax.swing.JFrame {
                                                 .addComponent(btnDiv, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(25, 25, 25)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(Sta24, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(Sta28, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnOr, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(25, 25, 25)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(btnXor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -779,7 +814,7 @@ public class MainFrame extends javax.swing.JFrame {
                                             .addGap(25, 25, 25)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(Sta22, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnLsh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGap(25, 25, 25)
                                                     .addComponent(btnNot, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
@@ -815,13 +850,13 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jRadioButton4)
-                                    .addComponent(jRadioButton3)
-                                    .addComponent(jRadioButton2))
+                                    .addComponent(rbtnHex)
+                                    .addComponent(rbtnBin)
+                                    .addComponent(rbtnOct)
+                                    .addComponent(rbtnDec))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jCheckBox1)
+                                    .addComponent(chbInv)
                                     .addComponent(jCheckBox2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -869,17 +904,17 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(btnAnd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Sta28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnDiv, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(btnMul, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Sta24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnOr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnXor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(btnNot, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Sta22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnLsh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -904,7 +939,7 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(Sta44, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Sta43, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDms, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Sta42, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Sta41, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -923,23 +958,215 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(Sta50, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Sta48, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Sta54, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Sta55, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Sta53, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Sta51, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Sta52, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addComponent(btnPi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private double calculate(String inputText) {
+    private void operate() {
+        switch (op) {
+            case '+':
+                tempNum += tempNum;
+                break;
+            case '-':
+                tempNum -= tempNum;
+                break;
+            case '*':
+                tempNum *= tempNum;
+                break;
+            case '/':
+                tempNum /= tempNum;
+                break;   
+            case '%':
+                tempNum %= tempNum;
+                break;
+            case 'X':
+                tempNum = Math.pow(tempNum, tempNum);
+                break;
+            case '&':
+                tempNum = (int)tempNum & (int)tempNum;
+                break;
+            case '|':
+                tempNum = (int)tempNum | (int)tempNum;
+                break;
+            case '^':
+                tempNum = (int)tempNum ^ (int)tempNum;
+                break;
+            case '<':
+                tempNum = (int)tempNum << (int)tempNum;
+                break;    
+            default:
+                break;
+        }
         
+        strResult = String.valueOf(tempNum);
+        
+        resultField.setText(strResult);
+        op = ' ';
+    }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+        JButton button = (JButton)e.getSource();
+        number = button.getText();
+        
+        if(number.equals("0")||number.equals("1")||number.equals("2")||number.equals("3")||number.equals("4")||number.equals("5")||number.equals("6")||number.equals("7")||number.equals("8")||number.equals("9")) {
+            if(((op == '+')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-')||(op == '-'))&&(flag == 0)) {
+                resultField.setText("");
+                flag++;
+            }
+            calResult = Double.parseDouble(resultField.getText() + number);
+            resultField.setText(resultField.getText() + number);
+        }
+        if(number.equals("CE")||number.equals("C")){
+            number = null;
+            calResult = 0.0;
+            op = ' ';
+            resultField.setText("");
+        } else if(number.equals("+")) {
+            tempNum = calResult;
+            op = '+';
+            flag = 0;
+        } else if(number.equals("-")){
+            tempNum = calResult;
+            op = '-';
+            flag = 0;
+        } else if(number.equals("*")) {
+            tempNum = calResult;
+            op = '-';
+            flag = 0;
+        } else if(number.equals("/")) {
+            tempNum = calResult;
+            op = '/';
+            flag = 0;
+        } else if(number.equals("And")) {
+            tempNum = calResult;
+            op = '&';
+            flag = 0;
+        } else if(number.equals("Or")) {
+            tempNum = calResult;
+            op = '|';
+            flag = 0;
+        } else if(number.equals("Xor")) {
+            tempNum = calResult;
+            op = '^';
+            flag = 0;
+        } else if(number.equals("Mod")) {
+            tempNum = calResult;
+            op = '%';
+            flag = 0;
+        } else if(number.equals("Not")) {
+            calResult = ~(int)calResult;
+            op = ' ';
+            flag = 0;
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("Int")) {
+            op = ' ';
+            flag = 0;
+            int temp = (int)calResult;
+            resultField.setText(Integer.toString(temp));
+            number = null;
+        } else if(number.equals("pi")) {
+            calResult = Math.PI;
+            op = ' ';
+            flag = 0;
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("x^y")) {
+            tempNum = calResult;
+            op = 'X';
+            flag = 0;
+        } else if(number.equals("x^3")) {
+            calResult = Math.pow(calResult, 3);
+            op = ' ';
+            flag = 0;
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("x^2")) {
+            calResult = Math.pow(calResult, 2);
+            op = ' ';
+            flag = 0;
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("Lsh")) {
+            tempNum = calResult;
+            op = '<';
+            flag = 0;
+        } else if(number.equals("sin")) {
+            number = null;
+            flag = 0;
+            calResult = Math.sin(Math.toRadians(calResult));
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+        } else if(number.equals("cos")) {
+            number = null;
+            flag = 0;
+            calResult = Math.cos(Math.toRadians(calResult));
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+        } else if(number.equals("tan")) {
+            number = null;
+            flag = 0;
+            calResult = Math.tan(Math.toRadians(calResult));
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+        } else if(number.equals("Exp")) {
+            calResult = Math.exp(calResult);
+            flag = 0;
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("In")) {
+            calResult = Math.log(calResult);
+            flag = 0;
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("log")) {
+            calResult = Math.log10(calResult);
+            flag = 0;
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("1/x")) {
+            calResult = 1/calResult;
+            flag = 0;
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("n!")) {
+            tempNum = 1.0;
+            
+            while (calResult > 1.0) {
+                tempNum *= calResult;
+                calResult--;
+            }
+            flag = 0;
+            op = ' ';
+            resultField.setText(Double.toString(calResult));
+            number = null;
+        } else if(number.equals("Backspace")) {
+            String context = resultField.getText();
+            String modifyContext = context.substring(0, context.length()-1);
+            resultField.setText(modifyContext);
+        } else if(number.equals("=")) {
+            operate();
+            String result = Double.toString(calResult);
+            resultField.setText(result);
+            op='=';
+            flag=0;
+        }
     }
     
     private void btnCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCEActionPerformed
@@ -951,7 +1178,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCActionPerformed
 
     private void btnBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackspaceActionPerformed
-        // TODO add your handling code here:
+        
+        int delIndex = strResult.length()-1;
+        strResult = strResult.substring(0 ,delIndex);
+        resultField.setText(strResult);
     }//GEN-LAST:event_btnBackspaceActionPerformed
 
     private void btnStaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaActionPerformed
@@ -963,137 +1193,91 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPMActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
-        numTemp += 0;
-        resultField.setText(numTemp);
+        screenTemp += 0; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn0ActionPerformed
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        numTemp += 1;
-        resultField.setText(numTemp);
+        screenTemp += 1; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        numTemp += 3;
-        resultField.setText(numTemp);
+        screenTemp += 3; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        numTemp += 2; resultField.setText(numTemp);
+        screenTemp += 2; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        numTemp += 6; resultField.setText(numTemp);
+        screenTemp += 6; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        numTemp += 5; resultField.setText(numTemp);
+        screenTemp += 5; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
-        numTemp += 4; resultField.setText(numTemp);
+        screenTemp += 4; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
-        numTemp += 7; resultField.setText(numTemp);
+        screenTemp += 7; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        numTemp += 9; resultField.setText(numTemp);
+        screenTemp += 9; resultField.setText(screenTemp);
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        numTemp += 8; resultField.setText(numTemp);
+        screenTemp += 8; resultField.setText(screenTemp);
 
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
-        inputTemp = Double.valueOf(numTemp);
-        
-        if(inputResult == 0){
-            inputResult = inputTemp;
-        } else {
-            inputResult += inputTemp;
-            
-            numResult = String.valueOf(inputResult);
-            resultField.setText(numResult);
-            
-            inputTemp = 0;
-            numResult = "";
-            operator = "+";
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                               
     }//GEN-LAST:event_btnPlusActionPerformed
 
     private void btnMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinActionPerformed
-        if(inputResult == 0){
-            inputResult = inputTemp;
-        } else {
-            inputResult -= inputTemp;
-            
-            numResult = String.valueOf(inputResult);
-            resultField.setText(numResult);
-            
-            inputTemp = 0;
-            numResult = "";
-            operator = "-";
-        }
+
     }//GEN-LAST:event_btnMinActionPerformed
 
     private void btnNotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNotActionPerformed
 
-    private void Sta22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta22ActionPerformed
+    private void btnLshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLshActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Sta22ActionPerformed
+    }//GEN-LAST:event_btnLshActionPerformed
 
     private void btnXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXorActionPerformed
 
-    private void Sta24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta24ActionPerformed
+    private void btnOrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Sta24ActionPerformed
+    }//GEN-LAST:event_btnOrActionPerformed
 
     private void btnMulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMulActionPerformed
-        if(inputResult == 0){
-            inputResult = inputTemp;
-        } else {
-            inputResult *= inputTemp;
-            
-            numResult = String.valueOf(inputResult);
-            resultField.setText(numResult);
-            
-            inputTemp = 0;
-            numResult = "";
-            operator = "*";
-        }      
+        
+       
     }//GEN-LAST:event_btnMulActionPerformed
 
     private void btnDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivActionPerformed
-        if(inputResult == 0){
-            inputResult = inputTemp;
-        } else {
-            inputResult /= inputTemp;
-            
-            numResult = String.valueOf(inputResult);
-            resultField.setText(numResult);
-            
-            inputTemp = 0;
-            numResult = "";
-            operator = "/";
-        }      
+        
+      
     }//GEN-LAST:event_btnDivActionPerformed
 
     private void btnAndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnAndActionPerformed
 
-    private void Sta28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta28ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Sta28ActionPerformed
+    private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
+
+        
+    }//GEN-LAST:event_btnModActionPerformed
 
     private void btnCommaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCommaActionPerformed
 
     private void Sta30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta30ActionPerformed
@@ -1148,9 +1332,9 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Sta42ActionPerformed
 
-    private void Sta43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta43ActionPerformed
+    private void btnDmsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDmsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Sta43ActionPerformed
+    }//GEN-LAST:event_btnDmsActionPerformed
 
     private void Sta44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta44ActionPerformed
         // TODO add your handling code here:
@@ -1184,21 +1368,22 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Sta51ActionPerformed
 
-    private void Sta52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta52ActionPerformed
+    private void btnPiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Sta52ActionPerformed
+    }//GEN-LAST:event_btnPiActionPerformed
 
     private void Sta53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta53ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Sta53ActionPerformed
 
-    private void Sta54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta54ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Sta54ActionPerformed
+    private void btnMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMCActionPerformed
+        strMemory = "";
+        resultField.setText(strMemory);
+    }//GEN-LAST:event_btnMCActionPerformed
 
-    private void Sta55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta55ActionPerformed
+    private void btnMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Sta55ActionPerformed
+    }//GEN-LAST:event_btnMRActionPerformed
 
     private void Sta56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sta56ActionPerformed
         // TODO add your handling code here:
@@ -1221,28 +1406,61 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIntActionPerformed
 
     private void btnResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultActionPerformed
-        inputTemp = Double.valueOf(numTemp);
-        
-        switch (operator) {
-            case "+":
-                inputResult += inputTemp;
-                break;
-            case "-":
-                inputResult -= inputTemp;
-                break;
-            case "*":
-                inputResult *= inputTemp;
-                break;
-            case "/":
-                inputResult /= inputTemp;
-                break;
- 
-        }
+
     }//GEN-LAST:event_btnResultActionPerformed
 
     private void resultFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resultFieldActionPerformed
+
+    private void rbtnDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDecActionPerformed
+        
+        strResult = resultField.getText();
+        tempNum = Double.parseDouble(strResult);
+        
+        if(tempNum!=0){
+            strResult = String.valueOf(tempNum);
+            resultField.setText(strResult);
+        }
+    }//GEN-LAST:event_rbtnDecActionPerformed
+
+    private void rbtnHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnHexActionPerformed
+        
+        strResult = resultField.getText();
+        tempNum = Double.parseDouble(strResult);
+        
+        if(tempNum!=0){
+            String strHex = Double.toHexString(tempNum);
+            resultField.setText(strHex);
+        }
+    }//GEN-LAST:event_rbtnHexActionPerformed
+
+    private void rbtnOctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnOctActionPerformed
+        
+        strResult = resultField.getText();
+        tempNum = Double.parseDouble(strResult);
+        
+        if(tempNum!=0){
+            String strOct = Integer.toOctalString((int) tempNum);
+            resultField.setText(strResult);
+        } 
+    }//GEN-LAST:event_rbtnOctActionPerformed
+
+    private void rbtnBinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnBinActionPerformed
+        
+        strResult = resultField.getText();
+        tempNum = Double.parseDouble(strResult);
+        
+        if(tempNum!=0){
+            String strBin = Integer.toBinaryString((int)tempNum);
+            resultField.setText(strResult);
+        }
+    }//GEN-LAST:event_rbtnBinActionPerformed
+
+    private void chbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbInvActionPerformed
+        
+        
+    }//GEN-LAST:event_chbInvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1283,9 +1501,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton BtnOne;
     private javax.swing.JButton BtnThree;
     private javax.swing.JButton BtnTwo;
-    private javax.swing.JButton Sta22;
-    private javax.swing.JButton Sta24;
-    private javax.swing.JButton Sta28;
     private javax.swing.JButton Sta30;
     private javax.swing.JButton Sta31;
     private javax.swing.JButton Sta32;
@@ -1296,7 +1511,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton Sta40;
     private javax.swing.JButton Sta41;
     private javax.swing.JButton Sta42;
-    private javax.swing.JButton Sta43;
     private javax.swing.JButton Sta44;
     private javax.swing.JButton Sta45;
     private javax.swing.JButton Sta46;
@@ -1305,10 +1519,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton Sta49;
     private javax.swing.JButton Sta50;
     private javax.swing.JButton Sta51;
-    private javax.swing.JButton Sta52;
     private javax.swing.JButton Sta53;
-    private javax.swing.JButton Sta54;
-    private javax.swing.JButton Sta55;
     private javax.swing.JButton Sta56;
     private javax.swing.JButton Sta57;
     private javax.swing.JButton Sta58;
@@ -1329,25 +1540,32 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCE;
     private javax.swing.JButton btnComma;
     private javax.swing.JButton btnDiv;
+    private javax.swing.JButton btnDms;
     private javax.swing.JButton btnInt;
+    private javax.swing.JButton btnLsh;
+    private javax.swing.JButton btnMC;
+    private javax.swing.JButton btnMR;
     private javax.swing.JButton btnMin;
+    private javax.swing.JButton btnMod;
     private javax.swing.JButton btnMul;
     private javax.swing.JButton btnNot;
+    private javax.swing.JButton btnOr;
     private javax.swing.JButton btnPM;
+    private javax.swing.JButton btnPi;
     private javax.swing.JButton btnPlus;
     private javax.swing.JButton btnResult;
     private javax.swing.JButton btnSta;
     private javax.swing.JButton btnXor;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox chbInv;
     private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton rbtnBin;
+    private javax.swing.JRadioButton rbtnDec;
+    private javax.swing.JRadioButton rbtnHex;
+    private javax.swing.JRadioButton rbtnOct;
     private javax.swing.JTextField resultField;
     // End of variables declaration//GEN-END:variables
 }

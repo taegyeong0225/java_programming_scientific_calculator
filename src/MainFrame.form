@@ -59,7 +59,7 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="Sta37" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
                                           <Component id="Sta38" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
-                                          <Component id="Sta43" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
+                                          <Component id="btnDms" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
                                           <Component id="Sta44" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -94,27 +94,27 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="Sta55" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <Component id="Sta54" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Component id="btnMR" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Component id="btnMC" min="-2" pref="65" max="-2" attributes="0"/>
                                       <Component id="Sta53" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="Sta52" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Component id="btnPi" min="-2" pref="65" max="-2" attributes="0"/>
                                       <Component id="Sta51" min="-2" pref="65" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jRadioButton1" min="-2" pref="67" max="-2" attributes="0"/>
+                              <Component id="rbtnHex" min="-2" pref="67" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="rbtnDec" min="-2" pref="69" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton3" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="rbtnOct" min="-2" pref="73" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton4" min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="rbtnBin" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jCheckBox1" min="-2" pref="124" max="-2" attributes="0"/>
+                              <Component id="chbInv" min="-2" pref="124" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -185,8 +185,8 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="Sta24" min="-2" pref="65" max="-2" attributes="0"/>
-                                              <Component id="Sta28" min="-2" pref="65" max="-2" attributes="0"/>
+                                              <Component id="btnOr" min="-2" pref="65" max="-2" attributes="0"/>
+                                              <Component id="btnMod" min="-2" pref="65" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -202,7 +202,7 @@
                                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="Sta22" min="-2" pref="65" max="-2" attributes="0"/>
+                                                  <Component id="btnLsh" min="-2" pref="65" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="btnNot" min="-2" pref="65" max="-2" attributes="0"/>
                                               </Group>
@@ -253,14 +253,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbtnHex" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbtnBin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbtnOct" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbtnDec" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="chbInv" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -320,19 +320,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btnAnd" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="Sta28" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="btnMod" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="btnDiv" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btnMul" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="Sta24" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="btnOr" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="btnXor" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btnNot" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="Sta22" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="btnLsh" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           <Component id="btnMin" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -366,7 +366,7 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="Sta43" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnDms" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="Sta42" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="Sta41" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
@@ -392,42 +392,54 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="Sta54" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnMC" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="Sta55" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnMR" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Sta53" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Sta51" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Sta52" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnPi" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
+              <EmptySpace pref="54" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="rbtnHex">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hex"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnHexActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="rbtnDec">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dec"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnDecActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="rbtnOct">
       <Properties>
         <Property name="text" type="java.lang.String" value="Oct"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnOctActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+    <Component class="javax.swing.JRadioButton" name="rbtnBin">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bin"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnBinActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCE">
       <Properties>
@@ -444,6 +456,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="resultField">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resultFieldActionPerformed"/>
       </Events>
@@ -698,7 +713,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNotActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta22">
+    <Component class="javax.swing.JButton" name="btnLsh">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -706,10 +721,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="2"/>
+        <Property name="text" type="java.lang.String" value="Lsh"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta22ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLshActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnXor">
@@ -726,7 +741,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta24">
+    <Component class="javax.swing.JButton" name="btnOr">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -734,10 +749,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="text" type="java.lang.String" value="Or"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta24ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnMul">
@@ -782,7 +797,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta28">
+    <Component class="javax.swing.JButton" name="btnMod">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -793,7 +808,7 @@
         <Property name="text" type="java.lang.String" value="Mod"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta28ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnComma">
@@ -974,7 +989,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta42ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta43">
+    <Component class="javax.swing.JButton" name="btnDms">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -985,7 +1000,7 @@
         <Property name="text" type="java.lang.String" value="dms"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta43ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDmsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Sta44">
@@ -1101,7 +1116,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta51ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta52">
+    <Component class="javax.swing.JButton" name="btnPi">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -1112,7 +1127,7 @@
         <Property name="text" type="java.lang.String" value="pi"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta52ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPiActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Sta53">
@@ -1129,7 +1144,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta53ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta54">
+    <Component class="javax.swing.JButton" name="btnMC">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -1140,10 +1155,10 @@
         <Property name="text" type="java.lang.String" value="MC"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta54ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMCActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Sta55">
+    <Component class="javax.swing.JButton" name="btnMR">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e6" green="e9" red="eb" type="rgb"/>
@@ -1154,7 +1169,7 @@
         <Property name="text" type="java.lang.String" value="MR"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Sta55ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMRActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Sta56">
@@ -1229,10 +1244,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResultActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="chbInv">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inv"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbInvActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2">
       <Properties>
